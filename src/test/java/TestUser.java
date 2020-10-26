@@ -26,6 +26,22 @@ public class TestUser {
         assertEquals(true, somebodyWhoLoggedIn.isLoggedIn());
     }
 
+    @Test
+    void testUnregisteredUser() {
+        Users users = new Users();
+        User somebodyWhoLoggedIn = users.logIn("UnregisteredUser", "badpassword");
+        assertEquals(null, somebodyWhoLoggedIn);
+    }
+
+    @Test
+    void testWrongPassword() {
+        Users users = new Users();
+        User user = createUser();
+        users.register(user);
+        User somebodyWhoLoggedIn = users.logIn("JNashty", "badpassword");
+        assertEquals(null, somebodyWhoLoggedIn);
+    }
+
     private User createUser() {
         String firstName = "Jacob";
         String lastName = "Nash";
@@ -35,4 +51,6 @@ public class TestUser {
 
         return new User(firstName, lastName, email, username, password);
     }
+
+
 }
