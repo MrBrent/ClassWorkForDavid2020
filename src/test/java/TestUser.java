@@ -28,6 +28,25 @@ public class TestUser {
     }
 
     @Test
+    void testRegisteredSeller() {
+        User jacobNash = createAndLogInUser();
+//        Jacob Nash is made a seller
+//        Verify that Jacob Nash has been made a seller
+//        stuff: magicItem
+//        price: $12.00
+//        startTime: Now + 1
+//        endTime: Now + 2
+//        Jacob Nash creates an auction to sell stuff
+//        Verify that stuff is listed for auction
+    }
+
+    private User createAndLogInUser() {
+        User testUser = createUser();
+        Users.getInstance().register(testUser);
+        return Users.getInstance().logIn("JNashty", "12345");
+    }
+
+    @Test
     void testUnregisteredUser() {
         User somebodyWhoLoggedIn = Users.getInstance().logIn("UnregisteredUser", "badpassword");
         assertEquals(null, somebodyWhoLoggedIn);
