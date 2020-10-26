@@ -45,4 +45,8 @@ public class User {
     public void logIn() {
         loggedIn = true;
     }
+
+    public void logOut() {
+        loggedIn = false;
+    }
 }

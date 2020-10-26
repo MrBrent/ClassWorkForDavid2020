@@ -36,4 +36,8 @@ public class Users {
         }
         return null;
     }
+
+    public void logOut(User user) {
+        user.logOut();
+    }
 }

@@ -23,6 +23,8 @@ public class TestUser {
         assertEquals(false, testUser.isLoggedIn());
         User somebodyWhoLoggedIn = Users.getInstance().logIn("JNashty", "12345");
         assertEquals(true, somebodyWhoLoggedIn.isLoggedIn());
+        Users.getInstance().logOut(somebodyWhoLoggedIn);
+        assertEquals(false, somebodyWhoLoggedIn.isLoggedIn());
     }
 
     @Test
@@ -45,7 +47,6 @@ public class TestUser {
         String email = "Jacob.Nash@intel.com";
         String username = "JNashty";
         String password = "12345";
-
         return new User(firstName, lastName, email, username, password);
     }
 
