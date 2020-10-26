@@ -5,11 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestUser {
     @Test
     void testUser() {
-        User uut = new User("Jacob", "Nash", "Jacob.Nash@intel.com", "JNashty", "12345");
-        assertEquals(uut.getFirstName(), "Jacob");
-        assertEquals(uut.getLastName(), "Nash");
-        assertEquals(uut.getEmail(), "Jacob.Nash@intel.com");
-        assertEquals(uut.getUsername(), "JNashty");
-        assertEquals(uut.getPassword(), "12345");
+        String firstName = "Jacob";
+        String lastName = "Nash";
+        String email = "Jacob.Nash@intel.com";
+        String username = "JNashty";
+        String password = "12345";
+
+        User uut = new User(firstName, lastName, email, username, password);
+
+        assertEquals(firstName, uut.getFirstName());
+        assertEquals(lastName, uut.getLastName());
+        assertEquals(email, uut.getEmail());
+        assertEquals(username, uut.getUsername());
+        assertEquals(password, uut.getPassword());
     }
 }
