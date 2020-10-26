@@ -19,25 +19,22 @@ public class TestUser {
     void testRegisterUser() {
         User testUser = createUser();
 
-        Users users = new Users();
-        users.register(testUser);
+        Users.getInstance().register(testUser);
         assertEquals(false, testUser.isLoggedIn());
-        User somebodyWhoLoggedIn = users.logIn("JNashty", "12345");
+        User somebodyWhoLoggedIn = Users.getInstance().logIn("JNashty", "12345");
         assertEquals(true, somebodyWhoLoggedIn.isLoggedIn());
     }
 
     @Test
     void testUnregisteredUser() {
-        Users users = new Users();
-        User somebodyWhoLoggedIn = users.logIn("UnregisteredUser", "badpassword");
+        User somebodyWhoLoggedIn = Users.getInstance().logIn("UnregisteredUser", "badpassword");
         assertEquals(null, somebodyWhoLoggedIn);
     }
 
     @Test
     void testWrongPassword() {
-        Users users = new Users();
-        User user = createUser();
-        users.register(user);
+        Users users = Users.getInstance();
+        users.register(createUser());
         User somebodyWhoLoggedIn = users.logIn("JNashty", "badpassword");
         assertEquals(null, somebodyWhoLoggedIn);
     }

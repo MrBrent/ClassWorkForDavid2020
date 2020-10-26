@@ -2,6 +2,15 @@ import java.util.ArrayList;
 
 public class Users {
     private ArrayList<User> registeredUsers = new ArrayList<>();
+    private static Users INSTANCE = new Users();
+
+    private Users() {
+
+    }
+
+    public static Users getInstance() {
+        return INSTANCE;
+    }
 
     public void register(User user) {
         if (findByUserName(user.getUsername()) == null){
