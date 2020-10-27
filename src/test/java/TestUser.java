@@ -44,37 +44,6 @@ public class TestUser {
         assertEquals(true, jacobNash.isSeller());
     }
 
-    @Test
-    void testCreateAuction() {
-        User jacobNash = createAndLogInUser();
-        jacobNash.makeSeller();
-        Instant now = Instant.now();
-        Date startTime = Date.from(now.plusSeconds(1));
-        Date endTime = Date.from(now.plusSeconds(2));
-        String item = "magicItem";
-        double startPrice = 12.00;
-
-        Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime);
-
-        assertEquals(jacobNash, auction.getSeller());
-        assertEquals(item, auction.getItem());
-        assertEquals(startPrice, auction.getPrice(), 0.001);
-        assertEquals(startTime, auction.getStartTime());
-        assertEquals(endTime, auction.getEndTime());
-    }
-
-    @Test
-    void testUserCannotCreateAuction() {
-        User jacobNash = createAndLogInUser();
-        Instant now = Instant.now();
-        Date startTime = Date.from(now.plusSeconds(1));
-        Date endTime = Date.from(now.plusSeconds(2));
-        String item = "magicItem";
-        double startPrice = 12.00;
-        assertThrows(RuntimeException.class, ()->
-          jacobNash.makeAuction(item, startPrice, startTime, endTime));
-    }
-
     private User createAndLogInUser() {
         User testUser = createUser();
         Users.getInstance().register(testUser);
