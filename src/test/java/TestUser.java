@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestUser {
     @BeforeEach
@@ -60,6 +61,18 @@ public class TestUser {
         assertEquals(startPrice, auction.getPrice(), 0.001);
         assertEquals(startTime, auction.getStartTime());
         assertEquals(endTime, auction.getEndTime());
+    }
+
+    @Test
+    void testUserCannotCreateAuction() {
+        User jacobNash = createAndLogInUser();
+        Instant now = Instant.now();
+        Date startTime = Date.from(now.plusSeconds(1));
+        Date endTime = Date.from(now.plusSeconds(2));
+        String item = "magicItem";
+        double startPrice = 12.00;
+        assertThrows(RuntimeException.class, ()->
+          jacobNash.makeAuction(item, startPrice, startTime, endTime));
     }
 
     private User createAndLogInUser() {
