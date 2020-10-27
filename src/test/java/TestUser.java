@@ -30,9 +30,16 @@ public class TestUser {
     @Test
     void testRegisteredSeller() {
         User jacobNash = createAndLogInUser();
-//        Jacob Nash is made a seller
-//        Verify that Jacob Nash has been made a seller
-//        stuff: magicItem
+        assertEquals(false, jacobNash.isSeller());
+        jacobNash.makeSeller();
+        assertEquals(true, jacobNash.isSeller());
+    }
+
+    @Test
+    void testAuction() {
+        User jacobNash = createAndLogInUser();
+        jacobNash.makeSeller();
+//        item(s): magicItem
 //        price: $12.00
 //        startTime: Now + 1
 //        endTime: Now + 2

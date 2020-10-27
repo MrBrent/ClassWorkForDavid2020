@@ -5,6 +5,7 @@ public class User {
     private final String username;
     private final String password;
     private boolean loggedIn = false;
+    private boolean isSeller = false;
 
     public User(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
@@ -49,4 +50,9 @@ public class User {
     public void logOut() {
         loggedIn = false;
     }
+
+    public void makeSeller() { isSeller = true;
+    }
+
+    public boolean isSeller() { return isSeller; }
 }
