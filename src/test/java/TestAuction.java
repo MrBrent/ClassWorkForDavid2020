@@ -44,6 +44,45 @@ public class TestAuction {
                 jacobNash.makeAuction(item, startPrice, startTime, endTime));
     }
 
+    @Test
+    void testBidOnAuction(){
+        User jacobNash = createSeller();
+        User frankSalsa = createBuyer();
+        Instant now = Instant.now();
+        Date startTime = Date.from(now.plusSeconds(1));
+        Date endTime = Date.from(now.plusSeconds(2000));
+        String item = "magicItem";
+        double startPrice = 12.00;
+
+        Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime);
+
+        auction.bid(frankSalsa, 12.01);
+        assertEquals(null, auction.getHighestBidder());
+        assertEquals(12.00, auction.getCurrentPrice(), 0.001);
+        auction.onStart();
+        auction.bid(frankSalsa, 12.01);
+        assertEquals(frankSalsa, auction.getHighestBidder());
+        assertEquals(12.01, auction.getCurrentPrice(), 0.001);
+
+    }
+
+    private User createBuyer() {
+        String firstName = "Frank";
+        String lastName = "Salsa";
+        String email = "frank.salsa@michigan.edu";
+        String username = "fsalsa";
+        String password = "12345";
+        User testUser = new User(firstName, lastName, email, username, password);
+        Users.getInstance().register(testUser);
+        return Users.getInstance().logIn("fsalsa", "12345");
+    }
+
+    private User createSeller() {
+        User jacobNash = createAndLogInUser();
+        jacobNash.makeSeller();
+        return jacobNash;
+    }
+
     private User createAndLogInUser() {
         User testUser = createUser();
         Users.getInstance().register(testUser);
@@ -58,6 +97,7 @@ public class TestAuction {
         String password = "12345";
         return new User(firstName, lastName, email, username, password);
     }
+
 
 
 }

@@ -34,4 +34,22 @@ public class Auction {
     public User getSeller() {
         return user;
     }
+
+    public void bid(User user, double price) {
+        //if nobody is currently winning the aution
+        //  if the bid price is greater than or equal
+        //
+        winningUser =
+    }
+
+    public User getHighestBidder() {
+        return null;
+    }
+
+    public double getCurrentPrice() {
+        return startPrice;
+    }
+
+    public void onStart() {
+    }
 }
