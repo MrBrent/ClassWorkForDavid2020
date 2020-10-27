@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class User {
     private final String firstName;
     private final String lastName;
@@ -55,4 +57,8 @@ public class User {
     }
 
     public boolean isSeller() { return isSeller; }
+
+    public Auction makeAuction(String item, double startPrice, Date startTime, Date endTime) {
+        return new Auction(this, item, startPrice, startTime, endTime);
+    }
 }

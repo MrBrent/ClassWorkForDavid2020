@@ -12,6 +12,10 @@ public class Users {
         return INSTANCE;
     }
 
+    public static void clear() {
+        INSTANCE.registeredUsers.clear();
+    }
+
     public void register(User user) {
         if (findByUserName(user.getUsername()) == null){
             registeredUsers.add(user);
