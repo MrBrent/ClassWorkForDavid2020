@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestUser {
     @BeforeEach
     void setUp(){
-        //clear user history
         Users.clear();
     }
     @Test
@@ -45,27 +44,22 @@ public class TestUser {
     }
 
     @Test
-    void testAuction() {
+    void testCreateAuction() {
         User jacobNash = createAndLogInUser();
         jacobNash.makeSeller();
-//        item(s): magicItem
-//        price: $12.00
-//        startTime: Now + 1
-//        endTime: Now + 2
-//        Jacob Nash creates an auction to sell stuff
         Instant now = Instant.now();
         Date startTime = Date.from(now.plusSeconds(1));
         Date endTime = Date.from(now.plusSeconds(2));
-        Auction auction = jacobNash.makeAuction("magicItem", 12.00, startTime, endTime);
+        String item = "magicItem";
+        double startPrice = 12.00;
+
+        Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime);
+
         assertEquals(jacobNash, auction.getSeller());
-        assertEquals("magicItem", auction.getItem());
-        assertEquals(12.00, auction.getPrice(), 0.001);
+        assertEquals(item, auction.getItem());
+        assertEquals(startPrice, auction.getPrice(), 0.001);
         assertEquals(startTime, auction.getStartTime());
         assertEquals(endTime, auction.getEndTime());
-
-
-
-//        Verify that stuff is listed for auction
     }
 
     private User createAndLogInUser() {
