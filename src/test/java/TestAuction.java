@@ -55,6 +55,16 @@ public class TestAuction {
     }
 
     @Test
+    void testSellerCannotBidOnOwnAuction() {
+        User jacobNash = createSeller();
+        Auction auction = createAuction(jacobNash);
+        auction.onStart();
+        auction.bid(jacobNash, 12.01);
+        assertEquals(null, auction.getHighestBidder());
+        assertEquals(12.00, auction.getHighestBid(), 0.001);
+    }
+
+    @Test
     void testBidOnStartedAuction(){
         User jacobNash = createSeller();
         User frankSalsa = createBuyer();

@@ -40,15 +40,20 @@ public class Auction {
     }
 
     public void bid(User user, double price) {
-        if(state != AuctionState.STARTED){return;}
-        if(getHighestBidder() == null){
-            if(price >= startPrice){
+        if (user == getSeller()) {
+            return;
+        }
+        if (state != AuctionState.STARTED) {
+            return;
+        }
+        if (getHighestBidder() == null) {
+            if (price >= startPrice) {
                 highestBidder = user;
                 highestBid = price;
             }
 
         } else {
-            if(price> highestBid){
+            if (price > highestBid) {
                 highestBidder = user;
                 highestBid = price;
             }
