@@ -75,6 +75,17 @@ public class TestAuction {
         assertEquals(12.01, auction.getHighestBid(), 0.001);
     }
 
+    @Test
+    void testBidStartingPrice() {
+        User jacobNash = createSeller();
+        User frankSalsa = createBuyer();
+        Auction auction = createAuction(jacobNash);
+        auction.onStart();
+        auction.bid(frankSalsa, 12.00);
+        assertEquals(frankSalsa, auction.getHighestBidder());
+        assertEquals(12.00, auction.getHighestBid(), 0.001);
+    }
+
     private Auction createAuction(User jacobNash) {
         Instant now = Instant.now();
         Date startTime = Date.from(now.plusSeconds(1));
