@@ -1,5 +1,5 @@
 public enum AuctionState {
-    STARTED
+    CLOSED, STARTED
 
 
 }

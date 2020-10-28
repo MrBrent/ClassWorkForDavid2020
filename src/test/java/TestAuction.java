@@ -1,3 +1,4 @@
+import com.tobeagile.training.ebaby.services.PostOffice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -84,6 +85,20 @@ public class TestAuction {
         auction.bid(frankSalsa, 12.00);
         assertEquals(frankSalsa, auction.getHighestBidder());
         assertEquals(12.00, auction.getHighestBid(), 0.001);
+    }
+
+    @Test
+    void testItemFailedToSellNotification() {
+//        Jacob Nash owns an auction
+        User jacobNash = createSeller();
+        Auction auction = createAuction(jacobNash);
+//        It starts
+        auction.onStart();
+//        It ends
+        auction.onClose();
+//        Jacob Nash is notified “Sorry, your auction for magicItem did not have any bidders.”
+        String email = PostOffice.getInstance().findEmail(jacobNash.getEmail(), "Sorry");
+        assertEquals("",email);
     }
 
     private Auction createAuction(User jacobNash) {

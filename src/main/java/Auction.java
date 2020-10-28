@@ -1,7 +1,9 @@
+import com.tobeagile.training.ebaby.services.PostOffice;
+
 import java.util.Date;
 
 public class Auction {
-    private final User user;
+    private final User seller;
     private final String item;
     private final double startPrice;
     private final Date startTime;
@@ -11,7 +13,7 @@ public class Auction {
     private AuctionState state;
 
     public Auction(User user, String item, double startPrice, Date startTime, Date endTime) {
-        this.user = user;
+        this.seller = user;
         this.item = item;
         this.startPrice = startPrice;
         this.startTime = startTime;
@@ -36,7 +38,7 @@ public class Auction {
     }
 
     public User getSeller() {
-        return user;
+        return seller;
     }
 
     public void bid(User user, double price) {
@@ -71,5 +73,11 @@ public class Auction {
 
     public void onStart() {
         state = AuctionState.STARTED;
+    }
+
+    public void onClose() {
+        state = AuctionState.CLOSED;
+        PostOffice.getInstance().sendEMail(this.seller.getEmail(), "Sorry, your auction for " + item + " did not have any bidders.");
+
     }
 }
