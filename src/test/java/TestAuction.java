@@ -45,22 +45,33 @@ public class TestAuction {
     }
 
     @Test
-    void testBidOnAuction(){
+    void testBidOnUnstartedAuction(){
         User jacobNash = createSeller();
         User frankSalsa = createBuyer();
+        Auction auction = createAuction(jacobNash);
+        auction.bid(frankSalsa, 12.01);
+        assertEquals(null, auction.getHighestBidder());
+        assertEquals(12.00, auction.getHighestBid(), 0.001);
+    }
+
+    @Test
+    void testBidOnStartedAuction(){
+        User jacobNash = createSeller();
+        User frankSalsa = createBuyer();
+        Auction auction = createAuction(jacobNash);
+        auction.onStart();
+        auction.bid(frankSalsa, 12.01);
+        assertEquals(frankSalsa, auction.getHighestBidder());
+        assertEquals(12.01, auction.getHighestBid(), 0.001);
+    }
+
+    private Auction createAuction(User jacobNash) {
         Instant now = Instant.now();
         Date startTime = Date.from(now.plusSeconds(1));
         Date endTime = Date.from(now.plusSeconds(2000));
         String item = "magicItem";
         double startPrice = 12.00;
-        Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime);
-        auction.bid(frankSalsa, 12.01);
-        assertEquals(null, auction.getHighestBidder());
-        assertEquals(12.00, auction.getCurrentPrice(), 0.001);
-        auction.onStart();
-        auction.bid(frankSalsa, 12.01);
-        assertEquals(frankSalsa, auction.getHighestBidder());
-        assertEquals(12.01, auction.getCurrentPrice(), 0.001);
+        return jacobNash.makeAuction(item, startPrice, startTime, endTime);
     }
 
     private User createBuyer() {

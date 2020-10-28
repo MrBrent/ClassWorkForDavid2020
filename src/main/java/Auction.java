@@ -16,6 +16,7 @@ public class Auction {
         this.startPrice = startPrice;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.highestBid = this.startPrice;
     }
 
     public String getItem() {
@@ -59,12 +60,8 @@ public class Auction {
         return highestBidder;
     }
 
-    public double getCurrentPrice() {
-        if(highestBidder != null){
-            return highestBid;
-        } else {
-            return startPrice;
-        }
+    public double getHighestBid() {
+        return highestBid;
     }
 
     public void onStart() {
