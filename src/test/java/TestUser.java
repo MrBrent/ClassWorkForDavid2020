@@ -14,9 +14,7 @@ public class TestUser {
     }
     @Test
     void testUser() {
-
         User uut = createUser();
-
         assertEquals("Jacob", uut.getFirstName());
         assertEquals("Nash", uut.getLastName());
         assertEquals("Jacob.Nash@intel.com", uut.getEmail());
@@ -27,7 +25,6 @@ public class TestUser {
     @Test
     void testRegisterUser() {
         User testUser = createUser();
-
         Users.getInstance().register(testUser);
         assertEquals(false, testUser.isLoggedIn());
         User somebodyWhoLoggedIn = Users.getInstance().logIn("JNashty", "12345");

@@ -53,9 +53,7 @@ public class TestAuction {
         Date endTime = Date.from(now.plusSeconds(2000));
         String item = "magicItem";
         double startPrice = 12.00;
-
         Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime);
-
         auction.bid(frankSalsa, 12.01);
         assertEquals(null, auction.getHighestBidder());
         assertEquals(12.00, auction.getCurrentPrice(), 0.001);
@@ -63,7 +61,6 @@ public class TestAuction {
         auction.bid(frankSalsa, 12.01);
         assertEquals(frankSalsa, auction.getHighestBidder());
         assertEquals(12.01, auction.getCurrentPrice(), 0.001);
-
     }
 
     private User createBuyer() {

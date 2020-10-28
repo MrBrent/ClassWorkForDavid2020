@@ -53,8 +53,7 @@ public class User {
         loggedIn = false;
     }
 
-    public void makeSeller() { isSeller = true;
-    }
+    public void makeSeller() { isSeller = true; }
 
     public boolean isSeller() { return isSeller; }
 
