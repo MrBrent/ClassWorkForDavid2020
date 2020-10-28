@@ -7,7 +7,7 @@ public class Auction {
     private final Date startTime;
     private final Date endTime;
     private User highestBidder;
-    private double currentBid;
+    private double highestBid;
     private AuctionState state;
 
     public Auction(User user, String item, double startPrice, Date startTime, Date endTime) {
@@ -39,27 +39,18 @@ public class Auction {
     }
 
     public void bid(User user, double price) {
-        //if nobody is currently winning the auction
         if(state != AuctionState.STARTED){return;}
         if(getHighestBidder() == null){
-            //  if the bid price is greater than or equal
             if(price >= startPrice){
                 highestBidder = user;
-                currentBid = price;
-            } else {
-                // Do Nothing
-                return;
-            }
-        } else {
-            if(price>currentBid){
-                highestBidder = user;
-                currentBid = price;
-            }
-            else {
-                // Do Nothing
-                return;
+                highestBid = price;
             }
 
+        } else {
+            if(price> highestBid){
+                highestBidder = user;
+                highestBid = price;
+            }
 
         }
     }
@@ -70,14 +61,13 @@ public class Auction {
 
     public double getCurrentPrice() {
         if(highestBidder != null){
-            return currentBid;
+            return highestBid;
         } else {
             return startPrice;
         }
     }
 
     public void onStart() {
-        //Auction state
         state = AuctionState.STARTED;
     }
 }
