@@ -79,11 +79,12 @@ public class Auction {
         state = AuctionState.CLOSED;
         // If auction was sold then send email to seller and buyer
         if(highestBidder != null){
+            SaleNotification saleNotif = new SaleNotification();
             sendEmailItemSold();
 
         } else {
             // Otherwise do below
-            SaleNotification notSold = new SaleNotification();
+            UnsoldNotification notSold = new UnsoldNotification();
             notSold.sendEmailItemNotSold(this);
         }
     }
