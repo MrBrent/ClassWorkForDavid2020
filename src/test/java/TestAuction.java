@@ -89,16 +89,12 @@ public class TestAuction {
 
     @Test
     void testItemFailedToSellNotification() {
-//        Jacob Nash owns an auction
         User jacobNash = createSeller();
         Auction auction = createAuction(jacobNash);
-//        It starts
         auction.onStart();
-//        It ends
         auction.onClose();
-//        Jacob Nash is notified “Sorry, your auction for magicItem did not have any bidders.”
-        String email = PostOffice.getInstance().findEmail(jacobNash.getEmail(), "Sorry");
-        assertEquals("<sendEMail address=\"Jacob.Nash@intel.com\" >Sorry, your auction for magicItem did not have any bidders.</sendEmail>\n",email);
+        String email = PostOffice.getInstance().findEmail(jacobNash.getEmail(), auction.getItem());
+        assertEquals("<sendEMail address=\""+jacobNash.getEmail()+"\" >Sorry, your auction for " + auction.getItem() + " did not have any bidders.</sendEmail>\n",email);
     }
 
     private Auction createAuction(User jacobNash) {
