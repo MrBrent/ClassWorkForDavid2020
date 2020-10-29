@@ -75,6 +75,12 @@ public class Auction {
 
     public void onClose() {
         state = AuctionState.CLOSED;
+        ClosedAuctionNotification notifier = getClosedAuctionNotification(highestBidder);
+        notifier.sendClosedAuctionNotification(this);
+
+    }
+
+    private static ClosedAuctionNotification getClosedAuctionNotification(User highestBidder) {
         ClosedAuctionNotification notifier;
         if(highestBidder != null){
              notifier = new SaleNotification();
@@ -82,7 +88,6 @@ public class Auction {
         } else {
              notifier = new UnsoldNotification();
         }
-        notifier.sendClosedAuctionNotification(this);
-
+        return notifier;
     }
 }
