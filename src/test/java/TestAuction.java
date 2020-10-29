@@ -1,4 +1,5 @@
 import com.tobeagile.training.ebaby.services.PostOffice;
+import org.approvaltests.Approvals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -111,9 +112,10 @@ public class TestAuction {
         auction.bid(frankSalsa, 12.00);
         //    It Ends
         auction.onClose();
-        //    Verify Jacob Nash received: Your <itemName> auction sold to bidder <bidderEmail> for <highBidAmount>.”
-        String sellerEmail = PostOffice.getInstance().findEmail(jacobNash.getEmail(), "Your " + auction.getItem());
-        assertEquals("<sendEMail address=\"Jacob.Nash@intel.com\" >Your magicItem auction sold to bidder frank.salsa@michigan.edu for $12.00.</sendEmail>\n", sellerEmail);
+        //    Verify the right emails were sent.”
+        //
+        String sellerEmail = PostOffice.getInstance().findEmail(jacobNash.getEmail(), auction.getItem());
+        Approvals.verifyAll("Email",PostOffice.getInstance().getLog());
         //    verify Frank Salsa received: “Congratulations! You won an auction for a <itemName> from <sellerEmail> for <highBidAmount>.”
         String buyerEmail = PostOffice.getInstance().findEmail(frankSalsa.getEmail(), "Congratulations!");
         assertEquals("<sendEMail address=\"frank.salsa@michigan.edu\" >Congratulations! You won an auction for a magicItem from Jacob.Nash@intel.com for $12.00.</sendEmail>\n", buyerEmail);

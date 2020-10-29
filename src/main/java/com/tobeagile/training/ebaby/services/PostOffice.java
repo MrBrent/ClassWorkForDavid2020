@@ -22,6 +22,9 @@ public class PostOffice {
 		return _log.size();
 	}
 
+	public Vector<String> getLog() {
+		return _log;
+	}
 	public void sendEMail( String address, String message ) {
 		String logString = String.format( "<sendEMail address=\"%s\" >%s</sendEmail>\n", address, message );
 		_log.add( logString );

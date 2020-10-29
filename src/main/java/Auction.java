@@ -79,12 +79,16 @@ public class Auction {
         state = AuctionState.CLOSED;
         // If auction was sold then send email to seller and buyer
         if(highestBidder != null){
-            PostOffice.getInstance().sendEMail(this.seller.getEmail(), String.format("Your %s auction sold to bidder %s for $%.2f.", item, highestBidder.getEmail(), highestBid));
-            PostOffice.getInstance().sendEMail(this.highestBidder.getEmail(), String.format("Congratulations! You won an auction for a %s from %s for $%.2f.", item, this.seller.getEmail(), highestBid ));
+            sendEmailItemSold();
 
         } else {
             // Otherwise do below
             PostOffice.getInstance().sendEMail(this.seller.getEmail(), "Sorry, your auction for " + item + " did not have any bidders.");
         }
+    }
+
+    private void sendEmailItemSold() {
+        PostOffice.getInstance().sendEMail(this.seller.getEmail(), String.format("Your %s auction sold to bidder %s for $%.2f.", item, highestBidder.getEmail(), highestBid));
+        PostOffice.getInstance().sendEMail(this.highestBidder.getEmail(), String.format("Congratulations! You won an auction for a %s from %s for $%.2f.", item, this.seller.getEmail(), highestBid ));
     }
 }
