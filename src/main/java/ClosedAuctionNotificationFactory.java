@@ -1,7 +1,4 @@
 public class ClosedAuctionNotificationFactory {
-    public ClosedAuctionNotificationFactory(User highestBidder) {
-    }
-
     static ClosedAuctionNotification getClosedAuctionNotification(User highestBidder) {
         ClosedAuctionNotification notifier;
         if(highestBidder != null){

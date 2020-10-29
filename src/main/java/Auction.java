@@ -51,13 +51,11 @@ public class Auction {
                 highestBidder = user;
                 highestBid = price;
             }
-
         } else {
             if (price > highestBid) {
                 highestBidder = user;
                 highestBid = price;
             }
-
         }
     }
 
@@ -75,10 +73,11 @@ public class Auction {
 
     public void onClose() {
         state = AuctionState.CLOSED;
-        ClosedAuctionNotificationFactory factory = new ClosedAuctionNotificationFactory(highestBidder);
         ClosedAuctionNotification notifier = ClosedAuctionNotificationFactory.getClosedAuctionNotification(highestBidder);
         notifier.sendClosedAuctionNotification(this);
-
     }
 
+    public double getTotalPayForSeller() {
+        return highestBid - (highestBid * 0.02);
+    }
 }

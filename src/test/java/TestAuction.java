@@ -108,17 +108,12 @@ public class TestAuction {
         User frankSalsa = createBuyer();
         //    It starts
         auction.onStart();
-        //    Frank bids 12.00 on the auction
-        auction.bid(frankSalsa, 12.00);
+        //    Frank bids 100.00 on the auction
+        auction.bid(frankSalsa, 100.00);
         //    It Ends
         auction.onClose();
         //    Verify the right emails were sent.”
-        //
-        String sellerEmail = PostOffice.getInstance().findEmail(jacobNash.getEmail(), auction.getItem());
         Approvals.verifyAll("Email",PostOffice.getInstance().getLog());
-        //    verify Frank Salsa received: “Congratulations! You won an auction for a <itemName> from <sellerEmail> for <highBidAmount>.”
-        String buyerEmail = PostOffice.getInstance().findEmail(frankSalsa.getEmail(), "Congratulations!");
-        assertEquals("<sendEMail address=\"frank.salsa@michigan.edu\" >Congratulations! You won an auction for a magicItem from Jacob.Nash@intel.com for $12.00.</sendEmail>\n", buyerEmail);
     }
 
     private Auction createAuction(User jacobNash) {
