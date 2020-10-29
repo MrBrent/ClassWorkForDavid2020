@@ -101,19 +101,24 @@ public class TestAuction {
 
     @Test
     void testItemSoldNotification() {
-        //    Jacob Nash owns an auction
         User jacobNash = createSeller();
         Auction auction = createAuction(jacobNash);
-        //    Frank Salsa is a buyer
         User frankSalsa = createBuyer();
-        //    It starts
         auction.onStart();
-        //    Frank bids 100.00 on the auction
         auction.bid(frankSalsa, 100.00);
-        //    It Ends
         auction.onClose();
-        //    Verify the right emails were sent.”
         Approvals.verifyAll("Email",PostOffice.getInstance().getLog());
+    }
+
+    @Test
+    void testShippingFeeNotAddedToDownloadableSoftwareItem() {
+        User jacobNash = createSeller();
+        Auction auction = createAuction(jacobNash, ItemCategory.DOWNLOADABLE_SOFTWARE);
+        User frankSalsa = createBuyer();
+        auction.onStart();
+        auction.bid(frankSalsa, 100.00);
+        auction.onClose();
+        assertEquals(100.00, auction.getTotalPayForBidder());
     }
 
     private Auction createAuction(User jacobNash) {
