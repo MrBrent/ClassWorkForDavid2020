@@ -57,9 +57,9 @@ public class User {
 
     public boolean isSeller() { return isSeller; }
 
-    public Auction makeAuction(String item, double startPrice, Date startTime, Date endTime) {
+    public Auction makeAuction(String item, double startPrice, Date startTime, Date endTime, ItemCategory itemCategory) {
         if(isSeller){
-            return new Auction(this, item, startPrice, startTime, endTime);
+            return new Auction(this, item, startPrice, startTime, endTime, itemCategory);
         } else{
             throw new RuntimeException(String.format("User '%s' must be a seller to create an auction!", username));
         }

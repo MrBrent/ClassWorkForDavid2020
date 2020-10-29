@@ -11,14 +11,14 @@ public class Auction {
     private double highestBid;
     private AuctionState state;
 
-    public Auction(User user, String item, double startPrice, Date startTime, Date endTime) {
+    public Auction(User user, String item, double startPrice, Date startTime, Date endTime, ItemCategory itemCategory) {
         this.seller = user;
         this.item = item;
         this.startPrice = startPrice;
         this.startTime = startTime;
         this.endTime = endTime;
         this.highestBid = this.startPrice;
-        this.category = ItemCategory.OTHER;
+        this.category = itemCategory;
     }
 
     public String getItem() {

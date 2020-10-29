@@ -26,7 +26,7 @@ public class TestAuction {
         String item = "magicItem";
         double startPrice = 12.00;
 
-        Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime);
+        Auction auction = jacobNash.makeAuction(item, startPrice, startTime, endTime, ItemCategory.OTHER);
 
         assertEquals(jacobNash, auction.getSeller());
         assertEquals(item, auction.getItem());
@@ -44,7 +44,7 @@ public class TestAuction {
         String item = "magicItem";
         double startPrice = 12.00;
         assertThrows(RuntimeException.class, ()->
-                jacobNash.makeAuction(item, startPrice, startTime, endTime));
+                jacobNash.makeAuction(item, startPrice, startTime, endTime, ItemCategory.OTHER));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class TestAuction {
         Date endTime = Date.from(now.plusSeconds(2000));
         String item = "magicItem";
         double startPrice = 12.00;
-        return jacobNash.makeAuction(item, startPrice, startTime, endTime);
+        return jacobNash.makeAuction(item, startPrice, startTime, endTime, ItemCategory.OTHER);
     }
 
     private User createBuyer() {
