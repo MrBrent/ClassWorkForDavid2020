@@ -1,5 +1,3 @@
-import com.tobeagile.training.ebaby.services.PostOffice;
-
 import java.util.Date;
 
 public class Auction {
@@ -78,12 +76,12 @@ public class Auction {
     public void onClose() {
         state = AuctionState.CLOSED;
         if(highestBidder != null){
-            SaleNotification sold = new SaleNotification();
-            sold.sendEmailItemSold(this);
+            ClosedAuctionNotification sold = new SaleNotification();
+            sold.sendClosedAuctionNotification(this);
 
         } else {
             UnsoldNotification notSold = new UnsoldNotification();
-            notSold.sendEmailItemNotSold(this);
+            notSold.sendClosedAuctionNotification(this);
         }
     }
 }
