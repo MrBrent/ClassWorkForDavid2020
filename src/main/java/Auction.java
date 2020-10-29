@@ -80,7 +80,7 @@ public class Auction {
             sold.sendClosedAuctionNotification(this);
 
         } else {
-            UnsoldNotification notSold = new UnsoldNotification();
+            ClosedAuctionNotification notSold = new UnsoldNotification();
             notSold.sendClosedAuctionNotification(this);
         }
     }
