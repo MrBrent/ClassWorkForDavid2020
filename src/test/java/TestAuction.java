@@ -12,6 +12,7 @@ public class TestAuction {
     @BeforeEach
     void setUp(){
         Users.clear();
+        PostOffice.getInstance().clear();
     }
 
     @Test
@@ -95,6 +96,27 @@ public class TestAuction {
         auction.onClose();
         String email = PostOffice.getInstance().findEmail(jacobNash.getEmail(), auction.getItem());
         assertEquals("<sendEMail address=\""+jacobNash.getEmail()+"\" >Sorry, your auction for " + auction.getItem() + " did not have any bidders.</sendEmail>\n",email);
+    }
+
+    @Test
+    void testItemSoldNotification() {
+        //    Jacob Nash owns an auction
+        User jacobNash = createSeller();
+        Auction auction = createAuction(jacobNash);
+        //    Frank Salsa is a buyer
+        User frankSalsa = createBuyer();
+        //    It starts
+        auction.onStart();
+        //    Frank bids 12.00 on the auction
+        auction.bid(frankSalsa, 12.00);
+        //    It Ends
+        auction.onClose();
+        //    Verify Jacob Nash received: Your <itemName> auction sold to bidder <bidderEmail> for <highBidAmount>.”
+        String sellerEmail = PostOffice.getInstance().findEmail(jacobNash.getEmail(), "Your " + auction.getItem());
+        assertEquals("<sendEMail address=\"Jacob.Nash@intel.com\" >Your magicItem auction sold to bidder frank.salsa@michigan.edu for $12.00.</sendEmail>\n", sellerEmail);
+        //    verify Frank Salsa received: “Congratulations! You won an auction for a <itemName> from <sellerEmail> for <highBidAmount>.”
+        String buyerEmail = PostOffice.getInstance().findEmail(frankSalsa.getEmail(), "Congratulations!");
+        assertEquals("<sendEMail address=\"frank.salsa@michigan.edu\" >Congratulations! You won an auction for a magicItem from Jacob.Nash@intel.com for $12.00.</sendEmail>\n", buyerEmail);
     }
 
     private Auction createAuction(User jacobNash) {
