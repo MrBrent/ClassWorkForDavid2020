@@ -83,8 +83,12 @@ public class Auction {
 
         } else {
             // Otherwise do below
-            PostOffice.getInstance().sendEMail(this.seller.getEmail(), "Sorry, your auction for " + item + " did not have any bidders.");
+            sendEmailItemNotSold();
         }
+    }
+
+    private void sendEmailItemNotSold() {
+        PostOffice.getInstance().sendEMail(this.seller.getEmail(), "Sorry, your auction for " + item + " did not have any bidders.");
     }
 
     private void sendEmailItemSold() {
