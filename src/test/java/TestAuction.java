@@ -98,7 +98,7 @@ public class TestAuction {
         auction.onClose();
 //        Jacob Nash is notified “Sorry, your auction for magicItem did not have any bidders.”
         String email = PostOffice.getInstance().findEmail(jacobNash.getEmail(), "Sorry");
-        assertEquals("",email);
+        assertEquals("<sendEMail address=\"Jacob.Nash@intel.com\" >Sorry, your auction for magicItem did not have any bidders.</sendEmail>\n",email);
     }
 
     private Auction createAuction(User jacobNash) {
