@@ -1,0 +1,3 @@
+public enum ItemCategory {
+    OTHER
+}

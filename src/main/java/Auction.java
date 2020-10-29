@@ -6,6 +6,7 @@ public class Auction {
     private final double startPrice;
     private final Date startTime;
     private final Date endTime;
+    private final ItemCategory category;
     private User highestBidder;
     private double highestBid;
     private AuctionState state;
@@ -17,6 +18,7 @@ public class Auction {
         this.startTime = startTime;
         this.endTime = endTime;
         this.highestBid = this.startPrice;
+        this.category = ItemCategory.OTHER;
     }
 
     public String getItem() {
