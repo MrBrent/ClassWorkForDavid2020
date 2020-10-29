@@ -80,4 +80,8 @@ public class Auction {
     public double getTotalPayForSeller() {
         return highestBid - (highestBid * 0.02);
     }
+
+    public double getTotalPayForBidder() {
+        return highestBid + 10.00;
+    }
 }

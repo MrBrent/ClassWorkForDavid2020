@@ -1,4 +1,4 @@
 Email[0] = <sendEMail address="Jacob.Nash@intel.com" >Your magicItem auction sold to bidder frank.salsa@michigan.edu for $98.00.</sendEmail>
 
-Email[1] = <sendEMail address="frank.salsa@michigan.edu" >Congratulations! You won an auction for a magicItem from Jacob.Nash@intel.com for $100.00.</sendEmail>
+Email[1] = <sendEMail address="frank.salsa@michigan.edu" >Congratulations! You won an auction for a magicItem from Jacob.Nash@intel.com for $110.00.</sendEmail>
 
