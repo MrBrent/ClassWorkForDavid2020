@@ -84,7 +84,7 @@ public class Auction {
         } else {
             // Otherwise do below
             SaleNotification notSold = new SaleNotification();
-            sendEmailItemNotSold();
+            notSold.sendEmailItemNotSold(this);
         }
     }
 
